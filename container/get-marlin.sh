@@ -19,7 +19,7 @@
 #  Contact: cryi@tutanota.com
 
 GIT_INFO=$(curl -sL "https://git.pirl.io/api/v4/projects/63/releases")                                       
-URL=$(printf "https://git.pirl.io/community/pirl%s" "$(printf "%s" "$GIT_INFO" | jq .[0].description | awk -F"|" '{for(i=1;i<=NF;i++) { if(match($i,/Marlin.*?content.*?/))print $(i+1) }}' | sed 's/.*\[.*\](\(.*\)).*/\1/g')")
+URL=$(printf "%s" "$(printf "%s" "$GIT_INFO" | jq .[0].description | awk -F"|" '{for(i=1;i<=NF;i++) { if(match($i,/Marlin.*?content.*?/))print $(i+1) }}' | sed 's/.*\[.*\](\(.*\)).*/\1/g')")
 
 if [ -f "./limits.conf" ]; then 
     if grep "MARLIN_BINARY=" "./limits.conf"; then 
